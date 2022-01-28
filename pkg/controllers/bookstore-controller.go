@@ -49,3 +49,14 @@ func FindBookById(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(book)
 
 }
+
+func UpdateBook(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	ID := mux.Vars(r)["bookId"]
+	IntOfId, _ := strconv.Atoi(ID)
+	var bookRequest models.Book
+	json.NewDecoder(r.Body).Decode(&bookRequest)
+	book := models.UpdateBookById(bookRequest, IntOfId)
+	json.NewEncoder(w).Encode(book)
+}

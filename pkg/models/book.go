@@ -36,3 +36,10 @@ func FindBookById(ID int) Book {
 	db.Find(&book, "id = ?", ID)
 	return book
 }
+
+func UpdateBookById(b Book, ID int) Book {
+	var book Book
+	db.Model(&Book{}).Where("id = ?", ID).Updates(Book{Name: b.Name, Author: b.Author, Nickname: b.Nickname})
+	db.Find(&book, "id = ? ", ID)
+	return book
+}

@@ -43,3 +43,14 @@ func UpdateBookById(b Book, ID int) Book {
 	db.Find(&book, "id = ? ", ID)
 	return book
 }
+
+func (b *Book) DeleteBookById(ID int) map[string]interface{} {
+	delMessage := map[string]interface{}{
+
+		"message": "Book was deleted successfully",
+		"success": true,
+	}
+	db.Delete(&Book{}, ID)
+
+	return delMessage
+}

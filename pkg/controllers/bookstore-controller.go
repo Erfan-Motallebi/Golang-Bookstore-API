@@ -60,3 +60,13 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	book := models.UpdateBookById(bookRequest, IntOfId)
 	json.NewEncoder(w).Encode(book)
 }
+
+func DeleteBook(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	ID := mux.Vars(r)["bookId"]
+	book := &models.Book{}
+	IntOfId, _ := strconv.Atoi(ID)
+	msg := book.DeleteBookById(IntOfId)
+	json.NewEncoder(w).Encode(msg)
+}
